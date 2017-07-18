@@ -1,7 +1,6 @@
 <?php
-include_once("config.php");
+include_once("../config.php");
 include_once("includes/lib.php");
-include_once("connection.php");
 
 session_start();
 $_SESSION['user'] = isset($_SESSION['user']) ? $_SESSION['user'] : '';
@@ -69,17 +68,84 @@ if(xacthuc($_SESSION['user'], $_SESSION['pass'])==false) {
       text-decoration: none;
       display: inline-block;
       font-size: 16px;
-      margin: 50px 2px 25px 2px;
+      margin: 50px 10px 25px 2px;
+      cursor: pointer;
+  }
+
+  .button3 {
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      padding: 30px 12px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 15px 2px 25px 10px;
       cursor: pointer;
   }
 	</style>
 
-		   <a href = "quanlysp.php" class="button1"> Quản Lý Sản Phẩm </a>
-			 <a href = "quanlyusers.php" class="button2"> Quản lý Người Dùng</a>
+
+  <div>
+
+         <?php
+          include_once("config.php");
+
+          $caulenh="select * from products_type";
+          $kq=mysql_query($caulenh);
+
+         ?>
+
+         <table width="600" border="2">
+
+
+             <tr>
+               <td>STT</td>
+               <td>Product type name</td>
+               <td>Product Type ID</td>
+               <td>Description</td>
+
+
+             </tr>
+
+             <?php
+          $stt=1;
+          while($d=mysql_fetch_array($kq))
+          {
+
+             echo
+
+             "<tr>
+
+              <td>$stt</td>
+               <td>$d[1]</td>
+               <td>$d[2]</td>
+               <td>$d[3]</td>
+							 <td><a href='xoaloaisp.php?ID=". $d["Possition"] . "'> Delete </a></td>
 
 
 
 
+
+
+             </tr>
+              ";
+
+
+          $stt++;
+          }
+
+          ?>
+        </table>
+
+
+
+  </div>
+
+
+
+<a href = "quanlysp.php" class="button3">BACK</a>
 
 
 
