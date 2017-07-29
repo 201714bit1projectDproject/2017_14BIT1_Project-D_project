@@ -20,19 +20,24 @@ $sql2    = "SELECT * FROM users
 if (isset($_POST["btn_submit"])) {
 			$pass1 = $_POST["pass"];
   			$pass2= $_POST["pass1"];
-			$pass3=$_POST["pass2"];
+			$pass3 = $_POST["pass2"];
   				
   			//Kiểm tra điều kiện bắt buộc đối với các field không được bỏ trống
 			if ($pass2 == "" || $pass3 == "" || $pass1 == "" ) 
 			{
-			echo "bạn vui lòng nhập đầy đủ thông tin";}
+				echo "bạn vui lòng nhập đầy đủ thông tin";
+				}
+			if else($pass1 != $password)
+			{
+				echo "sai mật khẩu cũ";
+			}
 			else{
 					  
 					if($pass1==$pass2||$pass1==$pass3)
 					  echo "mật khẩu cũ không được trùng với mật khẩu mới";
 					else{
 						if($pass2!=$pass3)
-							echo "mật khẩu mới và nhập lại mật khẩu mới phải gi61ng nhau";
+							echo "mật khẩu mới và nhập lại mật khẩu mới phải giống nhau";
 						else{
 							// Kiểm tra tài khoản đã tồn tại chưa
 						$sql="select * from users where username='$username'";

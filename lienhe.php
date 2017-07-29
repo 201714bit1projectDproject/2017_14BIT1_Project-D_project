@@ -4,13 +4,13 @@
 
 <div id="lienhe">
 
-<span class="style">CÔNG TY CỔ PHẦN CÔNG NGHỆ DKT</span>
+<span class="style">CÔNG TY CỔ PHẦN CÔNG NGHỆ FA</span>
 <p class="tintuc">
 
-<p class="tintuc">Địa chỉ:27 Núi Thành - Hải Châu - Đà Nẵng</p>
-<p class="tintuc">Điện thoại:01205307920</p>
+<p class="tintuc">Địa chỉ:227 Nguyễn Văn Cừ, phường 4, Quận 5, Hồ Chí Minh</p>
+<p class="tintuc">Điện thoại:0123456789</p>
 <p class="tintuc">Fax:</p>
-<p class="tintuc">Email:rynphan6@gmail.com</p>
+<p class="tintuc">Email:congaconga@gmail.com</p>
 </p>
 <h3>Thông Tin Phản Hồi</h3>
 
@@ -88,13 +88,22 @@ $hoten = $_POST['hoten'];
 $diachi = $_POST['diachi'];
 $email = $_POST['email'];
 $sdt = $_POST['sdt'];
-$sdt = $_POST['tieude'];
+$td = $_POST['tieude'];
 $noidung = $_POST['noidung'];
-//viết điều kiện yêu cầu  nhập tất cả các thông tin
-$lienhe = "INSERT INTO lienhe (hoten,diachi,email,sdt,tieude,noidung) VALUES ('$hoten','$diachi','$email','$sdt','$sdt','$noidung')";
+if($noidung==""||$hoten==""||$diachi==""||$email==""||$sdt==""||$td=="")
+{
+	echo "các ô không được để trống";
+	
+}
+else{
+	//viết điều kiện yêu cầu  nhập tất cả các thông tin
+	$lienhe = "INSERT INTO lienhe (hoten,diachi,email,sdt,tieude,noidung) VALUES ('$hoten','$diachi','$email','$sdt','$td','$noidung')";
 $tb1 = mysql_query($lienhe);
 
 echo "<h3>Gửi Thành Công</h3>";
+
+}
+
 
 }
 ?>

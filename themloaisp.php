@@ -133,7 +133,7 @@ if(xacthuc($_SESSION['user'], $_SESSION['pass'])==false) {
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>PHP-01: LESSON 15</title>
+<title>PROJECTD</title>
 
 <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="js/lib.js"></script>
@@ -146,7 +146,7 @@ if(xacthuc($_SESSION['user'], $_SESSION['pass'])==false) {
 <div id="wrapper">
 	<div id="topmenu"><?php include_once("includes/topmenu.php"); ?></div>
 	<div id="header"><?php include_once("includes/header.php"); ?></div>
-				<div class="box-login-info">Xin chào: <?php echo $_SESSION['user']; ?> | <a href="?mod=logout">Thoát</a></div>
+				<!--<div class="box-login-info">Xin chào: <?php //echo $_SESSION['user']; ?> | <a href="?mod=logout">Thoát</a></div>!-->
 		<div id="nav-menu"><?php echo create_menu(); ?></div>
 			<div><?php include_once("includes/slider.php"); ?></div>
 
@@ -161,16 +161,19 @@ if(xacthuc($_SESSION['user'], $_SESSION['pass'])==false) {
   <?php
   	if(isset($_POST["THEM"])&&($_POST["THEM"]=="Thêm"))
   	{
-
+		
   		$name=$_POST["productname"];
   		$id=$_POST["productid"];
   		$des=$_POST["Description"];
-
+		if($name==""||$id==""||$des=="")
+		{
+			echo "Thêm cho đàng hoàng!";
+		}else{
   		$str="insert into products_type(ProductTypeName,Possition,Description) values('$name', '$id','$des')";
   		mysql_query($str, $vConn);
 
       echo'them thanh cong';
-  	}
+  	}}
 
   ?>
 

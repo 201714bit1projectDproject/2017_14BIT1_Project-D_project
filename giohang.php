@@ -15,8 +15,18 @@ $tong=0;
            <td>Xóa sản phẩm</td>
       <tr>
 <?php
+if (isset($_SESSION['user']) && $_SESSION['pass']){
+           $username=$_SESSION["user"];
+		$password=$_SESSION["pass"];
+       }
+       else{
+		   echo "bạn phải đăng nhập hoặc đăng kí để mua hàng";
+          
+		   die();
+       }
 include('/ketnoi.php');
-$username=$_SESSION["user"];
+$username=$_SESSION['user'];
+
 
 		   $prod = "SELECT * FROM giohang WHERE  tendangnhap='$username'";
 		   $prod2 = mysql_query($prod);
@@ -61,19 +71,38 @@ $username=$_SESSION["user"];
 </tr>
 </table>
 <?php
+	$flag=1;
 	if (isset($_POST['thaydoi']))
 		{
+			
 			$tdsl=$_POST['tdsl'];
-			$id=$_POST['tendangnhap'];
-			$query = "UPDATE giohang SET sl='$tdsl' WHERE tendangnhap='$id'";
-			$results = mysql_query($query)
-			or die(mysql_error());
+			if(preg_match('/[^1-9]/',$tdsl))
+			{
+				echo "Bạn chỉ được gõ các số 1-9 vào ô số lượng!";
+				$flag=0;
+			}
+			else{
+				$tdsl=$_POST['tdsl'];
+				$id=$_POST['tendangnhap'];
+				$query = "UPDATE giohang SET sl='$tdsl' WHERE tendangnhap='$id'";
+				$results = mysql_query($query)
+				or die(mysql_error());
 				echo "Số lượng đã được thay đổi<br>";
-				echo "<a href='?mod=giohang'><input type='submit' name='capnhat' value='Cập Nhật Giỏ Hàng'></a><br>'";;
+				echo "<a href='?mod=giohang'><input type='submit' name='capnhat' value='Cập Nhật Giỏ Hàng'></a><br>'";
+				$flag=1;
+			}
+			
 		}
 ?>
-<form method="POST" action="?mod=thanhtoan">
-	<input type='submit' name='thanhtoan' value='THANH TOÁN'>
-</form>
-</br>
+<?php
+if($flag=="1"){
+?>
+		<form method="POST" action="?mod=thanhtoan">
+					<input type='submit' name='thanhtoan' value='THANH TOÁN'>
+				</form>
+				</br>
+
+<?php 
+}
+?>	
 <a href="index.php">Trở về trang chủ</a>
